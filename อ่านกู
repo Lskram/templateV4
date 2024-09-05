@@ -1,0 +1,190 @@
+1. โหลด โฟลเดอร์templtes v4 มา
+2. สร้าง conf.lua
+function love.conf(t)
+    t.window.width = 1280       -- กำหนดความกว้างของหน้าต่างแสดงผล
+
+    t.window.height = 720       -- กำหนดความสูงของหน้าต่างแสดงผล
+
+    t.window.resizable = true   -- อนุญาตให้ปรับขนาดหน้าต่างได้
+
+    t.window.fullscreen = false -- ไม่เปิดใช้งานโหมดเต็มหน้าจอ
+
+    t.window.vsync = 1          -- เปิดใช้งาน VSync (ลดการฉีกขาดของภาพ)
+
+    t.window.title = "My Game"  -- ชื่อของหน้าต่าง
+end
+
+3. สร้าง main.lua
+    local map = require("map")
+
+    local anim = require("animModule")
+
+    function love.load()
+
+    end
+
+    function love.update(dt)
+
+    end
+
+    function love.draw()
+
+    end
+ทดลองพิมพ์ love . error ก็ทำใหม่จนรันหน้ามืดๆได้
+
+4. ต่อไปสร้าง Map
+เข้า แอปtile
+นิวโปเจค
+เลือกที่อยู่ไฟล์ map ใน เทม C:\Users\SSKRU_06\Downloads\templateV4\maps
+ตั้งชื่อ map1
+นิวเมป
+ตั้งค่าสเกลตามหน้าจอ เบื้องต้น 30*20 map size กด ok
+ที่ด้าน leyer - new leyer เลือกเป็นภาพ
+คลิก อิมเมจ เเล้วไป poproty
+เลือก 3 จุดเเล้วอิมพอร์ตรูป เเบล็คกราว์เข้ามา C:\Users\SSKRU_06\Downloads\templateV4\assets\backgrounds
+จากนั้น export เป็นชื่อmap.lua save file .lua
+
+5. ไปที่ main.lua
+เพิ่มโค้ด
+    local map = require("map")
+
+    local anim = require("animModule")
+
+    function love.load()
+        ; local world=map.load("maps/map.lua",{})
+
+    end
+
+    function love.update(dt)
+        ; map.update(dt)
+    end
+
+    function love.draw()
+        ; map.draw()
+    end
+(ถ้าก็อปไปก็ลบคอมเม้นท์ออก)
+เเล้วรัน love . จะได้ภาพพื้นหลังตามภาพนี้
+ภาพประกอบการสอน/1.png
+
+6.ต่อไปตัวละคร
+ก็อปมาจากเทม
+    local map = require("map")
+
+    local anim = require("animModule")
+
+    ; local state = nil
+
+    ; local player = {
+
+    ;     x = 100,
+
+    ;     y = 100,
+
+    ;     width = 32,
+
+    ;     height = 32,
+
+    ;     speed = 100
+
+    ; }
+    (ถ้าก็อปไปก็ลบคอมเม้นท์ออก)
+    function love.load()
+        local world = map.load("maps/map.lua", {})
+    end
+
+    function love.update(dt)
+        map.update(dt)
+    end
+
+    function love.draw()
+        map.draw()
+    end
+
+เพิ่มเขียวเข้ามา 
+7. image
+    local map = require("map")
+
+    local anim = require("animModule")
+
+    local state = nil
+
+    local player = {
+
+        x = 100,
+
+        y = 100,
+
+        width = 32,
+
+        height = 32,
+
+        speed = 100
+
+    }
+
+    function love.load()
+        local world = map.load("maps/map.lua", {})
+        ; player.image=love.graphics.newImage("assets/images/sprite.png")
+    end
+
+    function love.update(dt)
+        map.update(dt)
+    end
+
+    function love.draw()
+        map.draw()
+        ; love.graphics.draw(player.image,player.x,player.y)
+    end
+จากนั้นกด love . ให้ได้รูปดังตัวอย่าง
+ภาพประกอบการสอน/2.png
+
+8. เพิ่มโลก / คำนวนการเคลื่อนไหว
+    local map = require("map")
+
+    local anim = require("animModule")
+
+    local state = nil
+
+    local player = {
+
+        x = 100,
+
+        y = 100,
+
+        width = 32,
+
+        height = 32,
+
+        speed = 100
+
+    }
+
+    function love.load()
+        ; map.load("maps/map.lua", {})
+        ; local world = map.getWorld()
+        ; world:add(player, player.x, player.y, player.width, player.height)
+        player.image = love.graphics.newImage("assets/images/sprite.png")
+    end
+
+    function love.update(dt)
+        ; local dx, dy = 0, 0
+        ; map.update(dt)
+        ; dx=player.speed*dt
+        ; map.movePlayer(player,dx,dy)
+
+    end
+
+    function love.draw()
+        map.draw()
+        love.graphics.draw(player.image, player.x, player.y)
+    end
+
+เสร็จเเล้วลองรัน love . ห้ามให้เเตก ตัวละครจะเดินไปข้างหน้าเรื่อยๆนั่นคือสำเร็จดังภาพ
+ภาพประกอบการสอน/3.png
+**********นอกเรื่อง dx=player.speed*dt*********
+เปลี่ยนได้ 
+    dx=-player.speed*dt ถอยหลังเเกน x
+    dx=player.speed*dt เดินหน้าเเกน x
+    dy=player.speed*dt เดินหน้าเเกน y
+    dy=-player.speed*dt ถอยหลังเเกน y
+    หลักๆก็ไปทำให้มันเคลื่อนที่ตามลูกศรเอา ถาม GPT เอาก็ได้หรือไม่ก็ใช้โค้ดตามสไลด์ที่จารย์สอน //ที่ควบคุมตัวละคร//ไสลด์สุดท้าย

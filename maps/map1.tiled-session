@@ -1,0 +1,29 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "map.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "map.tmx": {
+            "scale": 0.5630729166666666,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 480.3995930071224,
+                "y": 319.6744056979004
+            }
+        }
+    },
+    "last.exportedFilePath": "C:/Users/SSKRU_06/Downloads/templateV4/maps",
+    "map.lastUsedExportFilter": "Lua files (*.lua)",
+    "map.lastUsedFormat": "tmx",
+    "openFiles": [
+        "map.tmx"
+    ],
+    "project": "map1.tiled-project",
+    "recentFiles": [
+        "map.tmx"
+    ]
+}
